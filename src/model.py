@@ -1,7 +1,7 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, classification_report, precision_score
 
 def train_logistic_regression(X_train, y_train):
     """Train Logistic Regression model"""
@@ -29,6 +29,7 @@ def evaluate_model(model, vectorizer, X_test, y_test):
     y_pred = model.predict(X_test_tfidf)
     
     accuracy = accuracy_score(y_test, y_pred)
+    precision = precision_score(y_test, y_pred, average='weighted')
     report = classification_report(y_test, y_pred)
     
-    return accuracy, report, y_pred
+    return accuracy, precision, report, y_pred
